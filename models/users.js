@@ -4,7 +4,7 @@ var db = database.createClient();
 var users = exports;
 
 users.authenticate = function (name, password, callback) {
-  db.query('SELECT * FROM users WHERE name = ?', [name,], queryCallBack);
+  db.query('SELECT * FROM users WHERE name = ?', [name,], queryCallback);
   function queryCallback(err, results, fields) {
     db.end();
     if (err) {
