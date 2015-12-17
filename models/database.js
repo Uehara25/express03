@@ -10,6 +10,8 @@ Database.prototype._getClient = function () {
   return this.client;
 }
 
+Database.prototype.dbAuth = config.databaseAuth;
+
 Database.prototype.query = function (query, params, callback) {
   var client = this._getClient();
   return client.query(query, params, callback);
