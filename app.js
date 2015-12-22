@@ -4,8 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var MemchachedStore = require('connect-memcached');
-
+var session = require('express-session');
+var SQLiteStore = require('connect-sqlite3')(session);
 var config = require('./config');
 
 var routes = require('./routes/index');
@@ -24,6 +24,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// session
+app.use(session({
+  store: new SQLiteStore,
+  resave: true,
+  saveUninitialized: true,
+  secret: 'keyboard cat'
+}));
 
 app.use('/', routes);
 app.use('/users', users);
