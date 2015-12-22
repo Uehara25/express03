@@ -1,2 +1,4 @@
 /memcached
+/node_modules
+sessions.db
 config.json
